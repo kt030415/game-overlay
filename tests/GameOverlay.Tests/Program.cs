@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using GameOverlay.Core;
 
@@ -13,6 +14,7 @@ namespace GameOverlay.Tests
                 DefaultConfigMatchesReference();
                 InvalidConfigFallsBackToDefaults();
                 MissingConfigIsCreated();
+                GeometryPlacesSegmentsAroundCenter();
                 Console.WriteLine("All tests passed.");
                 return 0;
             }
@@ -69,6 +71,18 @@ namespace GameOverlay.Tests
             AssertEqual(true, File.Exists(path), "config file exists");
             AssertEqual(28, config.LineThickness, "created config thickness");
             Directory.Delete(dir, true);
+        }
+
+        private static void GeometryPlacesSegmentsAroundCenter()
+        {
+            OverlayConfig config = OverlayConfig.CreateDefault();
+            OverlayLayout layout = OverlayGeometry.Calculate(new Size(1920, 1080), config);
+
+            AssertEqual(new Rectangle(535, 526, 360, 28), layout.LeftLine, "left line");
+            AssertEqual(new Rectangle(1025, 526, 360, 28), layout.RightLine, "right line");
+            AssertEqual(new Rectangle(946, 148, 28, 320), layout.TopLine, "top line");
+            AssertEqual(new Rectangle(946, 612, 28, 320), layout.BottomLine, "bottom line");
+            AssertEqual(new Rectangle(947, 520, 26, 40), layout.CenterPoint, "center point");
         }
 
         private static void AssertEqual<T>(T expected, T actual, string name)
