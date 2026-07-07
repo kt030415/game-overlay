@@ -1,12 +1,12 @@
-﻿using System;
-
 namespace GameOverlay.App
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        [System.STAThread]
+        private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            var app = new System.Windows.Application();
+            app.Run(new OverlayWindow(GameOverlay.Core.OverlayConfig.CreateDefault()));
         }
     }
 }
