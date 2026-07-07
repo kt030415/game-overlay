@@ -17,6 +17,7 @@ namespace GameOverlay.Core
         public int CenterPointWidth { get; set; } = 26;
         public int CenterPointHeight { get; set; } = 40;
         public double CenterPointOpacity { get; set; } = 0.9;
+        public bool StretchLinesToEdges { get; set; } = true;
 
         public static OverlayConfig CreateDefault()
         {
@@ -40,7 +41,8 @@ namespace GameOverlay.Core
                 CenterGap = NonNegative(CenterGap, defaults.CenterGap),
                 CenterPointWidth = Positive(CenterPointWidth, defaults.CenterPointWidth),
                 CenterPointHeight = Positive(CenterPointHeight, defaults.CenterPointHeight),
-                CenterPointOpacity = ClampOpacity(CenterPointOpacity, defaults.CenterPointOpacity)
+                CenterPointOpacity = ClampOpacity(CenterPointOpacity, defaults.CenterPointOpacity),
+                StretchLinesToEdges = StretchLinesToEdges
             };
         }
 

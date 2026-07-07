@@ -37,6 +37,7 @@ namespace GameOverlay.Tests
             AssertEqual(26, config.CenterPointWidth, "center point width");
             AssertEqual(40, config.CenterPointHeight, "center point height");
             AssertEqual(0.9, config.CenterPointOpacity, "center point opacity");
+            AssertEqual(true, config.StretchLinesToEdges, "stretch lines");
             AssertEqual("Ctrl+Alt+X", config.ToggleHotkey, "hotkey");
         }
 
@@ -53,6 +54,7 @@ namespace GameOverlay.Tests
                 CenterPointWidth = 0,
                 CenterPointHeight = 0,
                 CenterPointOpacity = -1,
+                StretchLinesToEdges = true,
                 ToggleHotkey = ""
             };
 
@@ -78,10 +80,10 @@ namespace GameOverlay.Tests
             OverlayConfig config = OverlayConfig.CreateDefault();
             OverlayLayout layout = OverlayGeometry.Calculate(new Size(1920, 1080), config);
 
-            AssertEqual(new Rectangle(535, 526, 360, 28), layout.LeftLine, "left line");
-            AssertEqual(new Rectangle(1025, 526, 360, 28), layout.RightLine, "right line");
-            AssertEqual(new Rectangle(946, 148, 28, 320), layout.TopLine, "top line");
-            AssertEqual(new Rectangle(946, 612, 28, 320), layout.BottomLine, "bottom line");
+            AssertEqual(new Rectangle(0, 526, 895, 28), layout.LeftLine, "left line");
+            AssertEqual(new Rectangle(1025, 526, 895, 28), layout.RightLine, "right line");
+            AssertEqual(new Rectangle(946, 0, 28, 468), layout.TopLine, "top line");
+            AssertEqual(new Rectangle(946, 612, 28, 468), layout.BottomLine, "bottom line");
             AssertEqual(new Rectangle(947, 520, 26, 40), layout.CenterPoint, "center point");
         }
 

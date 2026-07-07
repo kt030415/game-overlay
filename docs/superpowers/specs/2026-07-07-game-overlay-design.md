@@ -33,8 +33,9 @@ Default visual parameters:
 - Line color: `#ffff00`
 - Line opacity: `0.35`
 - Line thickness: `28px`
-- Horizontal line length: `360px` on each side
-- Vertical line length: `320px` above and below center
+- Stretch lines to the primary screen edges by default
+- Horizontal line length when edge stretch is disabled: `360px` on each side
+- Vertical line length when edge stretch is disabled: `320px` above and below center
 - Center gap: `52px` from the center point area to each line segment
 - Center point: `26px` wide by `40px` tall rounded square
 - Center point opacity: `0.9`
@@ -52,6 +53,7 @@ Configurable values:
 - Line thickness
 - Horizontal line length
 - Vertical line length
+- Stretch lines to screen edges
 - Center gap
 - Center point size
 - Center point opacity

@@ -2,7 +2,6 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
 using GameOverlay.Core;
-using Forms = System.Windows.Forms;
 
 namespace GameOverlay.App
 {
@@ -32,11 +31,10 @@ namespace GameOverlay.App
 
         public void RefreshScreenBounds()
         {
-            Forms.Screen screen = Forms.Screen.PrimaryScreen;
-            Left = screen.Bounds.Left;
-            Top = screen.Bounds.Top;
-            Width = screen.Bounds.Width;
-            Height = screen.Bounds.Height;
+            Left = 0;
+            Top = 0;
+            Width = SystemParameters.PrimaryScreenWidth;
+            Height = SystemParameters.PrimaryScreenHeight;
             InvalidateVisual();
         }
 

@@ -919,8 +919,9 @@ Important default values:
 - Line color: `#ffff00`
 - Line opacity: `0.35`
 - Line thickness: `28`
-- Horizontal line length: `360`
-- Vertical line length: `320`
+- Stretch lines to screen edges: `true`
+- Horizontal line length when edge stretch is disabled: `360`
+- Vertical line length when edge stretch is disabled: `320`
 - Center gap: `52`
 - Center point size: `26x40`
 - Center point opacity: `0.9`

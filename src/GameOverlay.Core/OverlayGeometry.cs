@@ -45,29 +45,37 @@ namespace GameOverlay.Core
             int topEnd = centerY - normalized.CenterGap - normalized.CenterPointHeight / 2;
             int bottomStart = centerY + normalized.CenterGap + normalized.CenterPointHeight / 2;
 
-            Rectangle leftLine = new Rectangle(
-                leftEnd - normalized.HorizontalLineLength,
-                centerY - halfThickness,
-                normalized.HorizontalLineLength,
-                normalized.LineThickness);
+            Rectangle leftLine = normalized.StretchLinesToEdges
+                ? new Rectangle(0, centerY - halfThickness, leftEnd, normalized.LineThickness)
+                : new Rectangle(
+                    leftEnd - normalized.HorizontalLineLength,
+                    centerY - halfThickness,
+                    normalized.HorizontalLineLength,
+                    normalized.LineThickness);
 
-            Rectangle rightLine = new Rectangle(
-                rightStart,
-                centerY - halfThickness,
-                normalized.HorizontalLineLength,
-                normalized.LineThickness);
+            Rectangle rightLine = normalized.StretchLinesToEdges
+                ? new Rectangle(rightStart, centerY - halfThickness, canvas.Width - rightStart, normalized.LineThickness)
+                : new Rectangle(
+                    rightStart,
+                    centerY - halfThickness,
+                    normalized.HorizontalLineLength,
+                    normalized.LineThickness);
 
-            Rectangle topLine = new Rectangle(
-                centerX - halfThickness,
-                topEnd - normalized.VerticalLineLength,
-                normalized.LineThickness,
-                normalized.VerticalLineLength);
+            Rectangle topLine = normalized.StretchLinesToEdges
+                ? new Rectangle(centerX - halfThickness, 0, normalized.LineThickness, topEnd)
+                : new Rectangle(
+                    centerX - halfThickness,
+                    topEnd - normalized.VerticalLineLength,
+                    normalized.LineThickness,
+                    normalized.VerticalLineLength);
 
-            Rectangle bottomLine = new Rectangle(
-                centerX - halfThickness,
-                bottomStart,
-                normalized.LineThickness,
-                normalized.VerticalLineLength);
+            Rectangle bottomLine = normalized.StretchLinesToEdges
+                ? new Rectangle(centerX - halfThickness, bottomStart, normalized.LineThickness, canvas.Height - bottomStart)
+                : new Rectangle(
+                    centerX - halfThickness,
+                    bottomStart,
+                    normalized.LineThickness,
+                    normalized.VerticalLineLength);
 
             return new OverlayLayout(leftLine, rightLine, topLine, bottomLine, centerPoint);
         }
