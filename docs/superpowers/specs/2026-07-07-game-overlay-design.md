@@ -10,6 +10,7 @@ Build a small Windows utility that displays a centered yellow reference overlay 
 - A system tray icon is always available while the app is running.
 - The tray menu contains:
   - Show or hide overlay
+  - Open settings
   - Exit
 - A global hotkey toggles the overlay. The default hotkey is `Ctrl+Alt+X`.
 - The overlay is click-through, so it should not block mouse input to the game.
@@ -50,6 +51,7 @@ Configurable values:
 - Overlay enabled state
 - Hotkey
 - Line color
+- Color preset
 - Line opacity
 - Line thickness
 - Horizontal line length

@@ -25,6 +25,7 @@ Run `GameOverlay.exe` from that folder.
 ## Controls
 
 - Tray menu: show/hide overlay, exit
+- Tray settings: color bar and opacity slider
 - Hotkey: `Ctrl+Alt+X`
 
 ## Config
@@ -38,6 +39,7 @@ The app writes its config to:
 Important default values:
 
 - Line color: `#ffff00`
+- Color presets: red, yellow, blue, green, cyan
 - Line opacity: `0.35`
 - Line thickness: `28`
 - Stretch lines to screen edges: `true`

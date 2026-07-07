@@ -15,6 +15,7 @@ namespace GameOverlay.Tests
                 InvalidConfigFallsBackToDefaults();
                 MissingConfigIsCreated();
                 GeometryPlacesSegmentsAroundCenter();
+                ColorPresetsProvideRequestedColors();
                 Console.WriteLine("All tests passed.");
                 return 0;
             }
@@ -86,6 +87,15 @@ namespace GameOverlay.Tests
             AssertEqual(new Rectangle(946, 609, 28, 471), layout.BottomLine, "bottom line");
             AssertEqual(new Rectangle(943, 537, 34, 6), layout.CenterReticleHorizontal, "center reticle horizontal");
             AssertEqual(new Rectangle(957, 523, 6, 34), layout.CenterReticleVertical, "center reticle vertical");
+        }
+
+        private static void ColorPresetsProvideRequestedColors()
+        {
+            AssertEqual("#ff0000", OverlayColorPresets.Red, "red preset");
+            AssertEqual("#ffff00", OverlayColorPresets.Yellow, "yellow preset");
+            AssertEqual("#0066ff", OverlayColorPresets.Blue, "blue preset");
+            AssertEqual("#00ff00", OverlayColorPresets.Green, "green preset");
+            AssertEqual("#00ffff", OverlayColorPresets.Cyan, "cyan preset");
         }
 
         private static void AssertEqual<T>(T expected, T actual, string name)

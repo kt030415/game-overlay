@@ -13,6 +13,7 @@ namespace GameOverlay.App
         private readonly HotkeyWindow _hotkeyWindow;
         private readonly string _configPath;
         private OverlayConfig _config;
+        private SettingsWindow? _settingsWindow;
 
         public GameOverlayApplication()
         {
@@ -45,6 +46,7 @@ namespace GameOverlay.App
         {
             Forms.ContextMenuStrip menu = new Forms.ContextMenuStrip();
             menu.Items.Add("显示/隐藏 Overlay", null, (_, __) => ToggleOverlay());
+            menu.Items.Add("设置...", null, (_, __) => ShowSettings());
             menu.Items.Add("退出", null, (_, __) => ExitApplication());
             return menu;
         }
@@ -65,9 +67,31 @@ namespace GameOverlay.App
             ConfigStore.Save(_configPath, _config);
         }
 
+        private void ShowSettings()
+        {
+            if (_settingsWindow != null)
+            {
+                _settingsWindow.Activate();
+                return;
+            }
+
+            _settingsWindow = new SettingsWindow(_config);
+            _settingsWindow.ConfigChanged += (_, config) => ApplyConfig(config);
+            _settingsWindow.Closed += (_, __) => _settingsWindow = null;
+            _settingsWindow.Show();
+        }
+
+        private void ApplyConfig(OverlayConfig config)
+        {
+            _config = config.Normalize();
+            _overlay.UpdateConfig(_config);
+            ConfigStore.Save(_configPath, _config);
+        }
+
         private void ExitApplication()
         {
             _trayIcon.Visible = false;
+            _settingsWindow?.Close();
             _hotkeyWindow.Dispose();
             _overlay.Close();
             _trayIcon.Dispose();
