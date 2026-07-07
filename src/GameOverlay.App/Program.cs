@@ -5,8 +5,9 @@ namespace GameOverlay.App
         [System.STAThread]
         private static void Main()
         {
-            var app = new System.Windows.Application();
-            app.Run(new OverlayWindow(GameOverlay.Core.OverlayConfig.CreateDefault()));
+            System.Windows.Forms.Application.EnableVisualStyles();
+            var app = new GameOverlayApplication();
+            app.Run();
         }
     }
 }
