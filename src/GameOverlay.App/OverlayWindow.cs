@@ -44,12 +44,13 @@ namespace GameOverlay.App
             var size = new System.Drawing.Size((int)ActualWidth, (int)ActualHeight);
             OverlayLayout layout = OverlayGeometry.Calculate(size, _config);
             Brush lineBrush = new SolidColorBrush(WithOpacity(_config.LineColor, _config.LineOpacity));
-            Brush pointBrush = new SolidColorBrush(WithOpacity(_config.LineColor, _config.CenterPointOpacity));
+            Brush reticleBrush = new SolidColorBrush(WithOpacity(_config.LineColor, _config.CenterReticleOpacity));
             drawingContext.DrawRectangle(lineBrush, null, ToRect(layout.LeftLine));
             drawingContext.DrawRectangle(lineBrush, null, ToRect(layout.RightLine));
             drawingContext.DrawRectangle(lineBrush, null, ToRect(layout.TopLine));
             drawingContext.DrawRectangle(lineBrush, null, ToRect(layout.BottomLine));
-            drawingContext.DrawRoundedRectangle(pointBrush, null, ToRect(layout.CenterPoint), 5, 5);
+            drawingContext.DrawRectangle(reticleBrush, null, ToRect(layout.CenterReticleHorizontal));
+            drawingContext.DrawRectangle(reticleBrush, null, ToRect(layout.CenterReticleVertical));
         }
 
         private static Color WithOpacity(string hex, double opacity)

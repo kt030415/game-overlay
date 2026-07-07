@@ -44,8 +44,9 @@ Important default values:
 - Horizontal line length when edge stretch is disabled: `360`
 - Vertical line length when edge stretch is disabled: `320`
 - Center gap: `52`
-- Center point size: `26x40`
-- Center point opacity: `0.9`
+- Center crosshair length: `34`
+- Center crosshair thickness: `6`
+- Center crosshair opacity: `0.9`
 
 ## Full-screen Compatibility
 

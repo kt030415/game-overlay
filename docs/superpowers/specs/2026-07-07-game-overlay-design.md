@@ -26,7 +26,7 @@ Visual elements:
 - Lower vertical translucent yellow line
 - Center yellow dot or small rounded square
 
-The four line segments leave a clear gap around the center point. The line style should resemble the provided reference image: thick, visible, and translucent rather than a thin crosshair. The center point should be more prominent than the lines.
+The four line segments leave a clear gap around the center crosshair. The line style should resemble the provided reference image: thick, visible, and translucent. The center crosshair should be more prominent than the guide lines.
 
 Default visual parameters:
 
@@ -36,9 +36,10 @@ Default visual parameters:
 - Stretch lines to the primary screen edges by default
 - Horizontal line length when edge stretch is disabled: `360px` on each side
 - Vertical line length when edge stretch is disabled: `320px` above and below center
-- Center gap: `52px` from the center point area to each line segment
-- Center point: `26px` wide by `40px` tall rounded square
-- Center point opacity: `0.9`
+- Center gap: `52px` from the center crosshair area to each line segment
+- Center crosshair length: `34px`
+- Center crosshair thickness: `6px`
+- Center crosshair opacity: `0.9`
 
 ## Configuration
 
@@ -55,8 +56,9 @@ Configurable values:
 - Vertical line length
 - Stretch lines to screen edges
 - Center gap
-- Center point size
-- Center point opacity
+- Center crosshair length
+- Center crosshair thickness
+- Center crosshair opacity
 
 ## Architecture
 
@@ -67,7 +69,7 @@ The app is split into focused components:
 - `HotkeyController`: global hotkey registration and toggle event
 - `ConfigStore`: read, validate, default, and write JSON settings
 - `OverlayWindow`: transparent topmost click-through window
-- `OverlayRenderer`: draws the centered yellow line segments and center point
+- `OverlayRenderer`: draws the centered yellow line segments and center crosshair
 
 The first rendering backend uses a normal transparent layered window. The code should keep rendering separate from tray, hotkey, and config logic so a future DirectX hook backend can be added without replacing the rest of the app.
 
@@ -102,8 +104,8 @@ Manual checks:
 - `Ctrl+Alt+X` toggles overlay visibility.
 - Overlay is centered on the primary display.
 - Overlay remains click-through.
-- Lines are translucent yellow and do not pass through the center point.
-- Center point is visible.
+- Lines are translucent yellow and do not pass through the center crosshair.
+- Center crosshair is visible.
 - Overlay updates correctly after display resolution changes.
 - Overlay appears above normal windows.
 - Overlay appears above a borderless full-screen game or test window.

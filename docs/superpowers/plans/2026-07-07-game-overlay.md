@@ -923,8 +923,9 @@ Important default values:
 - Horizontal line length when edge stretch is disabled: `360`
 - Vertical line length when edge stretch is disabled: `320`
 - Center gap: `52`
-- Center point size: `26x40`
-- Center point opacity: `0.9`
+- Center crosshair length: `34`
+- Center crosshair thickness: `6`
+- Center crosshair opacity: `0.9`
 
 ## Full-screen compatibility
 
@@ -966,7 +967,7 @@ Expected:
 - Tray icon appears.
 - Overlay appears at screen center.
 - Yellow line segments are translucent.
-- Center point is visible.
+- Center crosshair is visible.
 - Mouse clicks pass through the overlay.
 - `Ctrl+Alt+X` hides and shows the overlay.
 - Tray exit closes the app.

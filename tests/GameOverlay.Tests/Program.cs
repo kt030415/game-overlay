@@ -34,9 +34,9 @@ namespace GameOverlay.Tests
             AssertEqual(360, config.HorizontalLineLength, "horizontal length");
             AssertEqual(320, config.VerticalLineLength, "vertical length");
             AssertEqual(52, config.CenterGap, "center gap");
-            AssertEqual(26, config.CenterPointWidth, "center point width");
-            AssertEqual(40, config.CenterPointHeight, "center point height");
-            AssertEqual(0.9, config.CenterPointOpacity, "center point opacity");
+            AssertEqual(34, config.CenterReticleLength, "center reticle length");
+            AssertEqual(6, config.CenterReticleThickness, "center reticle thickness");
+            AssertEqual(0.9, config.CenterReticleOpacity, "center reticle opacity");
             AssertEqual(true, config.StretchLinesToEdges, "stretch lines");
             AssertEqual("Ctrl+Alt+X", config.ToggleHotkey, "hotkey");
         }
@@ -51,9 +51,9 @@ namespace GameOverlay.Tests
                 HorizontalLineLength = 0,
                 VerticalLineLength = 0,
                 CenterGap = -10,
-                CenterPointWidth = 0,
-                CenterPointHeight = 0,
-                CenterPointOpacity = -1,
+                CenterReticleLength = 0,
+                CenterReticleThickness = 0,
+                CenterReticleOpacity = -1,
                 StretchLinesToEdges = true,
                 ToggleHotkey = ""
             };
@@ -80,11 +80,12 @@ namespace GameOverlay.Tests
             OverlayConfig config = OverlayConfig.CreateDefault();
             OverlayLayout layout = OverlayGeometry.Calculate(new Size(1920, 1080), config);
 
-            AssertEqual(new Rectangle(0, 526, 895, 28), layout.LeftLine, "left line");
-            AssertEqual(new Rectangle(1025, 526, 895, 28), layout.RightLine, "right line");
-            AssertEqual(new Rectangle(946, 0, 28, 468), layout.TopLine, "top line");
-            AssertEqual(new Rectangle(946, 612, 28, 468), layout.BottomLine, "bottom line");
-            AssertEqual(new Rectangle(947, 520, 26, 40), layout.CenterPoint, "center point");
+            AssertEqual(new Rectangle(0, 526, 891, 28), layout.LeftLine, "left line");
+            AssertEqual(new Rectangle(1029, 526, 891, 28), layout.RightLine, "right line");
+            AssertEqual(new Rectangle(946, 0, 28, 471), layout.TopLine, "top line");
+            AssertEqual(new Rectangle(946, 609, 28, 471), layout.BottomLine, "bottom line");
+            AssertEqual(new Rectangle(943, 537, 34, 6), layout.CenterReticleHorizontal, "center reticle horizontal");
+            AssertEqual(new Rectangle(957, 523, 6, 34), layout.CenterReticleVertical, "center reticle vertical");
         }
 
         private static void AssertEqual<T>(T expected, T actual, string name)

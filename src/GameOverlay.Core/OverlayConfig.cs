@@ -14,9 +14,9 @@ namespace GameOverlay.Core
         public int HorizontalLineLength { get; set; } = 360;
         public int VerticalLineLength { get; set; } = 320;
         public int CenterGap { get; set; } = 52;
-        public int CenterPointWidth { get; set; } = 26;
-        public int CenterPointHeight { get; set; } = 40;
-        public double CenterPointOpacity { get; set; } = 0.9;
+        public int CenterReticleLength { get; set; } = 34;
+        public int CenterReticleThickness { get; set; } = 6;
+        public double CenterReticleOpacity { get; set; } = 0.9;
         public bool StretchLinesToEdges { get; set; } = true;
 
         public static OverlayConfig CreateDefault()
@@ -39,9 +39,9 @@ namespace GameOverlay.Core
                 HorizontalLineLength = Positive(HorizontalLineLength, defaults.HorizontalLineLength),
                 VerticalLineLength = Positive(VerticalLineLength, defaults.VerticalLineLength),
                 CenterGap = NonNegative(CenterGap, defaults.CenterGap),
-                CenterPointWidth = Positive(CenterPointWidth, defaults.CenterPointWidth),
-                CenterPointHeight = Positive(CenterPointHeight, defaults.CenterPointHeight),
-                CenterPointOpacity = ClampOpacity(CenterPointOpacity, defaults.CenterPointOpacity),
+                CenterReticleLength = Positive(CenterReticleLength, defaults.CenterReticleLength),
+                CenterReticleThickness = Positive(CenterReticleThickness, defaults.CenterReticleThickness),
+                CenterReticleOpacity = ClampOpacity(CenterReticleOpacity, defaults.CenterReticleOpacity),
                 StretchLinesToEdges = StretchLinesToEdges
             };
         }

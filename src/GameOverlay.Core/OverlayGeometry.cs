@@ -9,20 +9,23 @@ namespace GameOverlay.Core
             Rectangle rightLine,
             Rectangle topLine,
             Rectangle bottomLine,
-            Rectangle centerPoint)
+            Rectangle centerReticleHorizontal,
+            Rectangle centerReticleVertical)
         {
             LeftLine = leftLine;
             RightLine = rightLine;
             TopLine = topLine;
             BottomLine = bottomLine;
-            CenterPoint = centerPoint;
+            CenterReticleHorizontal = centerReticleHorizontal;
+            CenterReticleVertical = centerReticleVertical;
         }
 
         public Rectangle LeftLine { get; }
         public Rectangle RightLine { get; }
         public Rectangle TopLine { get; }
         public Rectangle BottomLine { get; }
-        public Rectangle CenterPoint { get; }
+        public Rectangle CenterReticleHorizontal { get; }
+        public Rectangle CenterReticleVertical { get; }
     }
 
     public static class OverlayGeometry
@@ -34,16 +37,25 @@ namespace GameOverlay.Core
             int centerY = canvas.Height / 2;
             int halfThickness = normalized.LineThickness / 2;
 
-            Rectangle centerPoint = new Rectangle(
-                centerX - normalized.CenterPointWidth / 2,
-                centerY - normalized.CenterPointHeight / 2,
-                normalized.CenterPointWidth,
-                normalized.CenterPointHeight);
+            int reticleHalfLength = normalized.CenterReticleLength / 2;
+            int reticleHalfThickness = normalized.CenterReticleThickness / 2;
 
-            int leftEnd = centerX - normalized.CenterGap - normalized.CenterPointWidth / 2;
-            int rightStart = centerX + normalized.CenterGap + normalized.CenterPointWidth / 2;
-            int topEnd = centerY - normalized.CenterGap - normalized.CenterPointHeight / 2;
-            int bottomStart = centerY + normalized.CenterGap + normalized.CenterPointHeight / 2;
+            Rectangle centerReticleHorizontal = new Rectangle(
+                centerX - reticleHalfLength,
+                centerY - reticleHalfThickness,
+                normalized.CenterReticleLength,
+                normalized.CenterReticleThickness);
+
+            Rectangle centerReticleVertical = new Rectangle(
+                centerX - reticleHalfThickness,
+                centerY - reticleHalfLength,
+                normalized.CenterReticleThickness,
+                normalized.CenterReticleLength);
+
+            int leftEnd = centerX - normalized.CenterGap - reticleHalfLength;
+            int rightStart = centerX + normalized.CenterGap + reticleHalfLength;
+            int topEnd = centerY - normalized.CenterGap - reticleHalfLength;
+            int bottomStart = centerY + normalized.CenterGap + reticleHalfLength;
 
             Rectangle leftLine = normalized.StretchLinesToEdges
                 ? new Rectangle(0, centerY - halfThickness, leftEnd, normalized.LineThickness)
@@ -77,7 +89,7 @@ namespace GameOverlay.Core
                     normalized.LineThickness,
                     normalized.VerticalLineLength);
 
-            return new OverlayLayout(leftLine, rightLine, topLine, bottomLine, centerPoint);
+            return new OverlayLayout(leftLine, rightLine, topLine, bottomLine, centerReticleHorizontal, centerReticleVertical);
         }
     }
 }
