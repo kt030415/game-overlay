@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.Json;
 
@@ -20,14 +21,23 @@ namespace GameOverlay.Core
 
         public static void Save(string path, OverlayConfig config)
         {
-            string? directory = Path.GetDirectoryName(path);
-            if (!string.IsNullOrWhiteSpace(directory))
+            try
             {
-                Directory.CreateDirectory(directory);
-            }
+                string? directory = Path.GetDirectoryName(path);
+                if (!string.IsNullOrWhiteSpace(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
 
-            string json = JsonSerializer.Serialize(config.Normalize(), Options);
-            File.WriteAllText(path, json);
+                string json = JsonSerializer.Serialize(config.Normalize(), Options);
+                File.WriteAllText(path, json);
+            }
+            catch (IOException)
+            {
+            }
+            catch (UnauthorizedAccessException)
+            {
+            }
         }
 
         private static OverlayConfig Read(string path)
@@ -47,6 +57,10 @@ namespace GameOverlay.Core
                 return OverlayConfig.CreateDefault();
             }
             catch (IOException)
+            {
+                return OverlayConfig.CreateDefault();
+            }
+            catch (UnauthorizedAccessException)
             {
                 return OverlayConfig.CreateDefault();
             }

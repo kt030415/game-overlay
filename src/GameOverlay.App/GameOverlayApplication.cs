@@ -35,10 +35,19 @@ namespace GameOverlay.App
                 Visible = true,
                 ContextMenuStrip = BuildMenu()
             };
+            _trayIcon.DoubleClick += (_, __) => ShowSettings();
 
             if (_config.OverlayEnabled)
             {
                 _overlay.Show();
+            }
+            else if (StartupFeedback.ShouldShowHiddenOverlayNotice(_config))
+            {
+                _trayIcon.ShowBalloonTip(
+                    4000,
+                    StartupFeedback.HiddenOverlayTitle,
+                    StartupFeedback.HiddenOverlayMessage,
+                    Forms.ToolTipIcon.Info);
             }
         }
 

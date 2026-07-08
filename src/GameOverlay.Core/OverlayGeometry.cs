@@ -52,10 +52,10 @@ namespace GameOverlay.Core
                 normalized.CenterReticleThickness,
                 normalized.CenterReticleLength);
 
-            int leftEnd = centerX - normalized.CenterGap - reticleHalfLength;
-            int rightStart = centerX + normalized.CenterGap + reticleHalfLength;
-            int topEnd = centerY - normalized.CenterGap - reticleHalfLength;
-            int bottomStart = centerY + normalized.CenterGap + reticleHalfLength;
+            int leftEnd = centerX - normalized.CenterGap;
+            int rightStart = centerX + normalized.CenterGap;
+            int topEnd = centerY - normalized.CenterGap;
+            int bottomStart = centerY + normalized.CenterGap;
 
             Rectangle leftLine = normalized.StretchLinesToEdges
                 ? new Rectangle(0, centerY - halfThickness, leftEnd, normalized.LineThickness)

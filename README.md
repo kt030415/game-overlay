@@ -25,7 +25,8 @@ Run `GameOverlay.exe` from that folder.
 ## Controls
 
 - Tray menu: show/hide overlay, exit
-- Tray settings: color bar and opacity slider
+- Tray icon double-click: open settings
+- Tray settings: color presets, opacity slider, line thickness slider, center crosshair sliders, and stretch-to-edges toggle
 - Hotkey: `Ctrl+Alt+X`
 
 ## Config

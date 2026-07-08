@@ -14,7 +14,10 @@ namespace GameOverlay.Tests
                 DefaultConfigMatchesReference();
                 InvalidConfigFallsBackToDefaults();
                 MissingConfigIsCreated();
+                ReadOnlyConfigDoesNotPreventStartup();
+                HiddenStartupRequestsVisibleFeedback();
                 GeometryPlacesSegmentsAroundCenter();
+                ReticleLengthDoesNotMoveGuideLines();
                 ColorPresetsProvideRequestedColors();
                 Console.WriteLine("All tests passed.");
                 return 0;
@@ -76,17 +79,65 @@ namespace GameOverlay.Tests
             Directory.Delete(dir, true);
         }
 
+        private static void ReadOnlyConfigDoesNotPreventStartup()
+        {
+            string dir = Path.Combine(Path.GetTempPath(), "game-overlay-tests-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(dir);
+            string path = Path.Combine(dir, "config.json");
+            File.WriteAllText(path, "{\"OverlayEnabled\":false,\"LineThickness\":40}");
+            File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.ReadOnly);
+
+            try
+            {
+                OverlayConfig config = ConfigStore.LoadOrCreate(path);
+                AssertEqual(false, config.OverlayEnabled, "readonly config overlay enabled");
+                AssertEqual(40, config.LineThickness, "readonly config thickness");
+            }
+            finally
+            {
+                File.SetAttributes(path, FileAttributes.Normal);
+                Directory.Delete(dir, true);
+            }
+        }
+
+        private static void HiddenStartupRequestsVisibleFeedback()
+        {
+            OverlayConfig hidden = OverlayConfig.CreateDefault();
+            hidden.OverlayEnabled = false;
+            OverlayConfig visible = OverlayConfig.CreateDefault();
+
+            AssertEqual(true, StartupFeedback.ShouldShowHiddenOverlayNotice(hidden), "hidden overlay notice");
+            AssertEqual(false, StartupFeedback.ShouldShowHiddenOverlayNotice(visible), "visible overlay notice");
+        }
+
         private static void GeometryPlacesSegmentsAroundCenter()
         {
             OverlayConfig config = OverlayConfig.CreateDefault();
             OverlayLayout layout = OverlayGeometry.Calculate(new Size(1920, 1080), config);
 
-            AssertEqual(new Rectangle(0, 526, 891, 28), layout.LeftLine, "left line");
-            AssertEqual(new Rectangle(1029, 526, 891, 28), layout.RightLine, "right line");
-            AssertEqual(new Rectangle(946, 0, 28, 471), layout.TopLine, "top line");
-            AssertEqual(new Rectangle(946, 609, 28, 471), layout.BottomLine, "bottom line");
+            AssertEqual(new Rectangle(0, 526, 908, 28), layout.LeftLine, "left line");
+            AssertEqual(new Rectangle(1012, 526, 908, 28), layout.RightLine, "right line");
+            AssertEqual(new Rectangle(946, 0, 28, 488), layout.TopLine, "top line");
+            AssertEqual(new Rectangle(946, 592, 28, 488), layout.BottomLine, "bottom line");
             AssertEqual(new Rectangle(943, 537, 34, 6), layout.CenterReticleHorizontal, "center reticle horizontal");
             AssertEqual(new Rectangle(957, 523, 6, 34), layout.CenterReticleVertical, "center reticle vertical");
+        }
+
+        private static void ReticleLengthDoesNotMoveGuideLines()
+        {
+            OverlayConfig shortReticle = OverlayConfig.CreateDefault();
+            shortReticle.CenterReticleLength = 20;
+
+            OverlayConfig longReticle = OverlayConfig.CreateDefault();
+            longReticle.CenterReticleLength = 80;
+
+            OverlayLayout shortLayout = OverlayGeometry.Calculate(new Size(1920, 1080), shortReticle);
+            OverlayLayout longLayout = OverlayGeometry.Calculate(new Size(1920, 1080), longReticle);
+
+            AssertEqual(shortLayout.LeftLine, longLayout.LeftLine, "left line unchanged by reticle length");
+            AssertEqual(shortLayout.RightLine, longLayout.RightLine, "right line unchanged by reticle length");
+            AssertEqual(shortLayout.TopLine, longLayout.TopLine, "top line unchanged by reticle length");
+            AssertEqual(shortLayout.BottomLine, longLayout.BottomLine, "bottom line unchanged by reticle length");
         }
 
         private static void ColorPresetsProvideRequestedColors()
