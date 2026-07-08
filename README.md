@@ -16,6 +16,8 @@
 - 自动保存配置到用户目录，下次启动自动恢复
 
 ## 截图
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2df6c038-5d57-48c8-af1a-22dff7903044" />
+<img width="509" height="692" alt="image" src="https://github.com/user-attachments/assets/a3ecedcb-2109-4575-92b5-b16ae41e953e" />
 
 暂无截图。运行程序后，托盘图标右键打开菜单，或双击托盘图标进入设置。
 
