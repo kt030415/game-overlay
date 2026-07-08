@@ -27,7 +27,11 @@
 
 ## 直接下载使用
 
-下载仓库中的发布包：
+下载发布包：
+
+[GameOverlay-win-x64.zip](https://github.com/kt030415/game-overlay/raw/master/dist/GameOverlay-win-x64.zip)
+
+仓库路径：
 
 ```text
 dist\GameOverlay-win-x64.zip
