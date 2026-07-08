@@ -22,7 +22,18 @@
 ## 运行环境
 
 - Windows
-- .NET Core 3.0 Runtime 或 SDK
+- 直接运行发布版：不需要额外安装 .NET Runtime
+- 从源码运行或构建：需要 .NET Core 3.0 SDK
+
+## 直接下载使用
+
+下载仓库中的发布包：
+
+```text
+dist\GameOverlay-win-x64.zip
+```
+
+解压后双击 `GameOverlay.exe` 即可运行，不需要安装 .NET Runtime。
 
 ## 从源码运行
 
@@ -35,16 +46,16 @@ dotnet run --project src/GameOverlay.App/GameOverlay.App.csproj
 ## 构建发布版本
 
 ```powershell
-dotnet publish src/GameOverlay.App/GameOverlay.App.csproj -c Release -r win-x64 --self-contained false
+dotnet publish src/GameOverlay.App/GameOverlay.App.csproj -c Release
 ```
 
-发布文件会生成到：
+发布配置会生成 Windows x64 自包含单文件版本。发布文件会生成到：
 
 ```text
 src\GameOverlay.App\bin\Release\netcoreapp3.0\win-x64\publish
 ```
 
-运行其中的 `GameOverlay.exe` 即可。
+生成的 `GameOverlay.exe` 是自包含单文件程序。由于文件较大，建议压缩成 zip 后分发。
 
 ## 使用方式
 

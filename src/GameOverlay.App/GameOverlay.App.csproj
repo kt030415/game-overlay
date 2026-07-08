@@ -8,6 +8,11 @@
     <Nullable>enable</Nullable>
     <AssemblyName>GameOverlay</AssemblyName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameOverlay.Core\GameOverlay.Core.csproj" />
   </ItemGroup>
